@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS, 7,   8, 9, TRNS, TRNS, TRNS, TRNS, INS, DEL, PGUP, TRNS, TRNS, TRNS,       \
         TRNS, 4,   5, 6, TRNS, TRNS, LEFT, DOWN, UP, RGHT, PGDN, TRNS, TRNS, TRNS,       \
         TRNS, TRNS, 1, 2, 3, TRNS, TRNS, PSCR, HOME, END, TRNS, TRNS, TRNS, TRNS, TRNS, \
-        TRNS, TRNS, TRNS,                   TRNS,                   TRNS, TRNS, TRNS, TRNS),
+        TRNS, TRNS, 0,                   TRNS,                   TRNS, TRNS, TRNS, TRNS),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
