@@ -2,9 +2,9 @@
 
 /* 0: Main layer
 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-│ ESC │  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │  -  │  =  │▒▒▒▒▒│  \  │
+│ ESC │  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │  -  │  =  │▒▒▒▒▒│BKSPC│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│ TAB │  Q  │  W  │  E  │  R  │  T  │  Y  │  U  │  I  │  O  │  P  │  [  │  ]  │BKSPC│█████│
+│ TAB │  Q  │  W  │  E  │  R  │  T  │  Y  │  U  │  I  │  O  │  P  │  [  │  ]  │  \  │█████│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
 │CAPSL│  A  │  S  │  D  │  F  │  G  │  H  │  J  │  K  │  L  │  ;  │  '  │▒▒▒▒▒│ENTER│█████│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -16,8 +16,8 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* 0: ANSI qwerty */
-    LEGACY_KEYMAP(ESC,    1,    2,    3,    4,    5,    6,    7,    8,    9,    0, MINS,  EQL,   NO, BSLS, \
-           TAB,    Q,    W,    E,    R,    T,    Y,    U,    I,    O,    P, LBRC, RBRC, BSPC,       \
+    LEGACY_KEYMAP(ESC,    1,    2,    3,    4,    5,    6,    7,    8,    9,    0, MINS,  EQL,   NO, BSPC, \
+           TAB,    Q,    W,    E,    R,    T,    Y,    U,    I,    O,    P, LBRC, RBRC, BSLS,       \
           CAPS,    A,    S,    D,    F,    G,    H,    J,    K,    L, SCLN, QUOT,   NO, ENT ,       \
           LSFT,   NO,    Z,    X,    C,    V,    B,    N,    M, COMM,  DOT, SLSH,   NO, RSFT,   NO, \
           LCTL, FN0, LALT,                    SPC,                   RALT,  FN0, RGUI, RCTL),
@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
 │     │  7  │  8  │  9  │     │     │     │     │ INS │ DEL │PGUP │     │     │     │█████│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-│     │  4  │  5  │  6  │     │     │ LEFT│ DWN │ UP  │ RGHT│PGDN │     │▒▒▒▒▒│     │█████│
+│NLCK │  4  │  5  │  6  │     │     │ LEFT│ DWN │ UP  │ RGHT│PGDN │     │▒▒▒▒▒│     │█████│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
 │     │▒▒▒▒▒│  1  │  2  │  3  │     │     │PTSCN│HOME │ END │     │     │▒▒▒▒▒│     │▒▒▒▒▒│
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -37,10 +37,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     LEGACY_KEYMAP(
          GRV,   F1,   F2,   F3,   F4,   F5,   F6,   F7,   F8,   F9,  F10,  F11,  F12, TRNS, TRNS, \
-        TRNS, 7,   8, 9, TRNS, TRNS, TRNS, TRNS, INS, DEL, PGUP, TRNS, TRNS, TRNS,       \
-        TRNS, 4,   5, 6, TRNS, TRNS, LEFT, DOWN, UP, RGHT, PGDN, TRNS, TRNS, TRNS,       \
-        TRNS, TRNS, 1, 2, 3, TRNS, TRNS, PSCR, HOME, END, TRNS, TRNS, TRNS, TRNS, TRNS, \
-        TRNS, TRNS, 0,                   TRNS,                   TRNS, TRNS, TRNS, TRNS),
+        TRNS, P7,   P8, P9, TRNS, TRNS, TRNS, TRNS, INS, DEL, PGUP, TRNS, TRNS, TRNS,       \
+        NLCK, P4,   P5, P6, TRNS, TRNS, LEFT, DOWN, UP, RGHT, PGDN, TRNS, TRNS, TRNS,       \
+        TRNS, TRNS, P1, P2, P3, TRNS, TRNS, PSCR, HOME, END, TRNS, TRNS, TRNS, TRNS, TRNS, \
+        TRNS, TRNS, P0,                   TRNS,                   TRNS, TRNS, TRNS, TRNS),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
