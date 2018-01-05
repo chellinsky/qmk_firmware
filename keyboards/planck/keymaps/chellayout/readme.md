@@ -4,6 +4,8 @@ It has the keys I need in the places I expect.  A couple to dos:
 
 * Determine if it's worth having sounds play on raise and lower
 * Figure out a way to have a third layer with a keypad
+* Play a sound when starting and ending caps lock
+* Long press on enter is a shift... there is some magic key thing to make this happen
 
 # The Layout
 
