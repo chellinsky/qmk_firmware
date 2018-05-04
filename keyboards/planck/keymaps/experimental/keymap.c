@@ -1,5 +1,3 @@
-// This is the canonical layout file for the Quantum project. If you want to add another keyboard,
-// this is the style you want to emulate.
 
 #include "planck.h"
 #include "action_layer.h"
@@ -47,6 +45,7 @@ enum planck_keycodes {
 // Fillers to make layering more clear
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
+#define SW_SPC  SH_T(KC_SPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = {
@@ -71,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
   {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LEAD, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_FN0,  KC_FN0,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LEAD, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   SW_SPC,  SW_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Colemak
@@ -89,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
   {KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
   {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LEAD, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_FN0,  KC_FN0,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LEAD, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   SW_SPC,  SW_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Dvorak
@@ -107,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC},
   {KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH},
   {KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT },
-  {KC_LEAD, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_FN0,  KC_FN0,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LEAD, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   SW_SPC,  SW_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Lower
@@ -186,10 +185,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-  ACTION_SWAP_HANDS_TAP_KEY(KC_SPC),
-};
-
 #ifdef AUDIO_ENABLE
 
 float tone_startup[][2]    = SONG(STARTUP_SOUND);
@@ -216,7 +211,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case QWERTY:
           if (record->event.pressed) {
             #ifdef AUDIO_ENABLE
-              PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
+              PLAY_SONG(tone_qwerty);
             #endif
             persistent_default_layer_set(1UL<<_QWERTY);
           }
@@ -225,7 +220,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case COLEMAK:
           if (record->event.pressed) {
             #ifdef AUDIO_ENABLE
-              PLAY_NOTE_ARRAY(tone_colemak, false, 0);
+              PLAY_SONG(tone_colemak);
             #endif
             persistent_default_layer_set(1UL<<_COLEMAK);
           }
@@ -234,7 +229,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case DVORAK:
           if (record->event.pressed) {
             #ifdef AUDIO_ENABLE
-              PLAY_NOTE_ARRAY(tone_dvorak, false, 0);
+              PLAY_SONG(tone_dvorak);
             #endif
             persistent_default_layer_set(1UL<<_DVORAK);
           }
@@ -244,7 +239,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
             layer_on(_LOWER);
             #ifdef BACKLIGHT_ENABLE
-                breathing_speed_set(2);
+                breathing_period_set(2);
                 breathing_pulse();
             #endif
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
@@ -258,7 +253,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
             layer_on(_RAISE);
             #ifdef BACKLIGHT_ENABLE
-                breathing_speed_set(2);
+                breathing_period_set(2);
                 breathing_pulse();
             #endif
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
@@ -283,7 +278,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (!record->event.pressed) {
             #ifdef AUDIO_ENABLE
               stop_all_notes();
-              PLAY_NOTE_ARRAY(tone_plover, false, 0);
+              PLAY_SONG(tone_plover);
             #endif
             layer_on(_PLOVER);
           }
@@ -292,7 +287,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case EXT_PLV:
           if (record->event.pressed) {
             #ifdef AUDIO_ENABLE
-              PLAY_NOTE_ARRAY(tone_plover_gb, false, 0);
+              PLAY_SONG(tone_plover_gb);
             #endif
             layer_off(_PLOVER);
           }
@@ -364,12 +359,12 @@ void matrix_init_user(void) {
 void startup_user()
 {
     _delay_ms(20); // gets rid of tick
-    PLAY_NOTE_ARRAY(tone_startup, false, 0);
+    PLAY_SONG(tone_startup);
 }
 
 void shutdown_user()
 {
-    PLAY_NOTE_ARRAY(tone_goodbye, false, 0);
+    PLAY_SONG(tone_goodbye);
     _delay_ms(150);
     stop_all_notes();
 }
@@ -381,7 +376,7 @@ void music_on_user(void)
 
 void music_scale_user(void)
 {
-    PLAY_NOTE_ARRAY(music_scale, false, 0);
+    PLAY_SONG(music_scale);
 }
 
 #endif
